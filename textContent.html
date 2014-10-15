@@ -32,7 +32,57 @@
             var arr_str = ['Talin', 'Atlin', 'Linta', 'Ray', 'Mishra', 'raY', 'arhsim'];
             // Write a program to group and print all the anagrams within this array.
 
+            var obj = {
+                '123458': ['Talin', 'Atlin']
+            };
+
+            var key = 'data';
+            if (key in obj) {
+                obj[key].push('Mishra');
+            } else {
+                obj[key] = ['Mishra'];
+            }
+
+            console.log(obj);
+
+            function HashMap(arr) {
+                // refer to the hashmap / new object by referring to "this"
+
+                // loop over all the elements of the array
+                 // get digest for each element
+                 // check if digest exists
+                 // if it does, push the array element into the array value of the key
+            }
+
+            HashMap.prototype.print = function () {
+                var i = 1;
+                for (var prop in this) {
+                    if (this.hasOwnProperty(prop)) // var keys = Object.getOwnProperties(<object name>) ES5
+                        console.log(' Group ' + i++ + this[prop].join(', '));
+                }
+            };
+
+
+            var arr = [1,1,2,2,2,3,6,6,6,7,8,8,8];
+
+            // search
+            // sort - quicksort / mergesort
+            // storage - relationships --> graphs | sets ? hierarchy -- trees ? binary tree ?
+            // storage - queues / stacks - innovative
+
+            var hashmap = new HashMap(arr_str);
+            console.log(hashmap);
+
+            // Output:
+            // Group 1: 'Talin', 'Atlin', 'Linta'
+            // Group 2: 'Ray', 'raY'
+            // Group 3: 'Mishra', 'arhsim'
+
             // check for anagrams: Talin, Atlin, Linta, Tailn
+
+
+
+
 
         });
     </script>
