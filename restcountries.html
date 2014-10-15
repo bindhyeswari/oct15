@@ -3,6 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="base.css"/>
+
     <script>
 
         // make an ajax call to get all countries' data
@@ -20,6 +22,49 @@
         }());
         // modular code --> Constructors, functions ...
 
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var countries_ul = document.getElementById('countries');
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://restcountries.eu/rest/v1');
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.addEventListener('readystatechange', function () {
+                if ( xhr.readyState === 4 && xhr.status === 200 ) {
+                    var list_countries = JSON.parse(xhr.responseText);
+                    // console.log(list_countries);
+
+                    var hashmap = {};
+                    list_countries.forEach(function (country) {
+                        hashmap[country.alpha3Code] = country.name;
+                    });
+                    console.log(hashmap);
+
+
+                    for (var i = 0, len = list_countries.length; i < len; i++) {
+                        var country = list_countries[i];
+                        var li = createElement('li', '', countries_ul);
+                        createElement('h3', country.name, li);
+                        var ul = createElement('ul', '', li);
+
+                        for (var j = 0, lenx = country.borders.length; j < lenx; j++) {
+                            createElement('li', hashmap[country.borders[j]], ul);
+                        }
+                    }
+
+                }
+            });
+            xhr.send();
+
+            function createElement(type, html, parent) {
+                var element = document.createElement(type);
+                element.innerHTML = html;
+                parent.appendChild(element);
+                return element;
+            }
+        });
+
+
         // todo: dl dt dd - HTML5
 
     </script>
@@ -27,14 +72,8 @@
 <body>
 
     <article>
-        <ul>
-            <li>
-                <h3>Afghanistan</h3>
-                <ul class="neighbors">
-                    <li>Iran</li>
-                    <li>Pakistan</li>
-                </ul>
-            </li>
+        <ul id="countries">
+
         </ul>
     </article>
 </body>
